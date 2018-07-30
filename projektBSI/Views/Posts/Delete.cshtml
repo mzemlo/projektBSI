@@ -1,0 +1,42 @@
+﻿@model projektBSI.Entities.Post
+
+@{
+    ViewBag.Title = "Usuń wpis";
+}
+@if (Request.IsAuthenticated)
+{
+    <h2 class="page-title">@ViewBag.Title</h2>
+    <h3>Czy na pewno chcesz usunąć wpis?</h3>
+    <div>
+        <h4>Post</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Article)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Article)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Usuń" class="btn btn-default" /> |
+                @Html.ActionLink("Wróć do moich wpisów", "Index")
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<projektBSI.Models.PostModel>
+
+@{
+    ViewBag.Title = "Moje wpisy";
+}
+<div class="list-heading">
+    <h2 class="page-title col-md-8">@ViewBag.Title</h2>
+
+    @if (Request.IsAuthenticated)
+    {
+        <div class="add-new-btn">
+            @Html.ActionLink("Dodaj nowy artykuł", "Create")
+        </div>
+    }
+</div>
+<table class="table">
+    <tr>
+        <th class="col-md-8">
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        @if (User.IsInRole("Admin"))
+        {
+        <th class="col-md-1">
+            @Html.DisplayNameFor(model => model.Signature)
+        </th>
+        }
+        <th class="col-md-3">
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-md-8">
+                <a href="@Url.Action("Details", new { id = item.Id })"><h2>@Html.DisplayFor(modelItem => item.Title)</h2></a>
+            </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td class="col-md-1">
+                    @Html.DisplayFor(modelItem => item.Signature)
+                </td>
+            }
+            @if (Request.IsAuthenticated)
+            {
+                <td col-md-3>
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Podgląd", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+                </td>
+            }
+
+        </tr>
+    }
+
+</table>

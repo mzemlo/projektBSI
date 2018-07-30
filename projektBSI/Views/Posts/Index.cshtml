@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<projektBSI.Entities.Post>
+
+@*@if (Request.IsAuthenticated)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}*@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser.Signature)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.OrderByDescending(item => item.DateOfPublication))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                    <a href="@Url.Action("Details", new { id = item.Id })"><h1>@Html.DisplayFor(modelItem => item.Title)</h1></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.Signature)
+                </td>
+                @*@if (Request.IsAuthenticated)
+                {
+                    <td>
+                        @Html.ActionLink("Edytuj", "Edit", new { id = item.Id }) |                        
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+                    </td>
+                }*@
+
+            </tr>
+        }
+
+    </table>

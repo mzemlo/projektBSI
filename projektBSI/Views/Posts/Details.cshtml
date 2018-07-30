@@ -1,0 +1,19 @@
+﻿@model projektBSI.Entities.Post
+
+<div class="row">
+    <h2 class="post-title col-md-10">@Html.DisplayFor(model => model.Title)</h2>
+    <div class="col-md-10">
+        <p class="post-date">@Html.DisplayFor(model => model.DateOfPublication)</p>
+        <p class="post-author">@Html.DisplayFor(model => model.ApplicationUser.Signature)</p>
+    </div>
+    <hr class="col-md-11" />
+    <p class="post-article col-md-10" style="white-space: pre-line">@Html.DisplayFor(model => model.Article)</p>
+</div>
+<p>
+    <span>@Html.ActionLink("Wróć do strony głównej", "Index", "Home") </span><span>|</span>
+    @if (Request.IsAuthenticated)
+    {
+    <span>@Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) </span><span>|</span>
+    <span>@Html.ActionLink("Wróć do moich wpisów", "List")</span> 
+    }
+</p>
